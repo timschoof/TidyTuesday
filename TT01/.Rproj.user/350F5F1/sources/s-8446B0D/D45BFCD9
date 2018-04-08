@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1523118245241.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3926921217",
+    "id" : "D45BFCD9",
+    "lastKnownWriteTime" : 1523180837,
+    "last_content_update" : 1523180837048,
+    "path" : "~/DataScienceProjects/R4DS/TidyTuesday/TT01/TT01.R",
+    "project_path" : "TT01.R",
+    "properties" : {
+        "cursorPosition" : "34,56",
+        "scrollLine" : "24"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

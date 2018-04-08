@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "# Tidy Tuesday 01 \n# Average University Tuition Fees in the United States\n\n# Data source: https://onlinembapage.com/average-tuition-and-educational-attainment-in-the-united-states/\n  \n# Tidy Tuesday: https://github.com/rfordatascience/tidytuesday\n\nlibrary(plyr)\nlibrary(tidyverse)\nlibrary(here)\nlibrary(xlsx)\nlibrary(fiftystater) # USA map with nice Alaska and Hawaii insets\nlibrary(viridis) # colour mapping suitable for people with colour blindness\nlibrary(gganimate)\n\n# load data\nd<-read.xlsx(here(\"us_avg_tuition.xlsx\"),sheetName=\"Table 5\",header=TRUE)\n\ndd<- d %>%\n  mutate(State = tolower(State)) %>%\n  gather(Year, Fee, -State)\n\n  dd$Year <- as.factor(dd$Year) %>%\n  revalue(c(\"X2004.05\"=\"2004-2005\",\n            \"X2005.06\"=\"2005-2006\",\n            \"X2006.07\"=\"2006-2007\",\n            \"X..2007.08.\"=\"2007-2008\",\n            \"X2008.09\"=\"2008-2009\",\n            \"X2009.10\"=\"2009-2010\",\n            \"X2010.11\"=\"2010-2011\",\n            \"X2011.12\"=\"2011-2012\",\n            \"X2012.13\"=\"2012-2013\",\n            \"X2013.14\"=\"2013-2014\",\n            \"X2014.15\"=\"2014-2015\",\n            \"X2015.16\"=\"2015-2016\"))\n\n# map\n  p <- ggplot(data = map_data, aes(frame = month.no)) + \n    geom_polygon(data = map_data, aes(fill = prediction, x = long, y = lat,  group = group)) \n  \n  gganimate(p)\n  \n  #ggplot(aes(map_id = State)) + \np <- ggplot(dd,aes(map_id = State, frame = Year)) + \n  # map points to the fifty_states shape data\n  geom_map(aes(fill = Fee), map = fifty_states) + \n  expand_limits(x = fifty_states$long, y = fifty_states$lat) +\n  coord_map() +\n  scale_x_continuous(breaks = NULL) + \n  scale_y_continuous(breaks = NULL) +\n  #scale_fill_viridis(name=\"USD\", direction = -1) +\n  labs(x = \"\", y = \"\", title = \"Average in-state tuition fees in the United States\", subtitle = \"(2004 - 2005)\") +\n  theme(legend.position = \"right\", \n        panel.background = element_blank()) \n\n# and specify range of colour bar to be min and max of all data\n  \ngganimate(p, interval = .1, title_frame = FALSE)\n",
+    "created" : 1523008528581.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2287916454",
+    "id" : "1E402371",
+    "lastKnownWriteTime" : 1523121004,
+    "last_content_update" : 1523121004794,
+    "path" : "P:/Courses/R4DS/TidyTuesday/TT01/TT01.R",
+    "project_path" : "TT01.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
