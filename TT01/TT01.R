@@ -12,6 +12,8 @@ library(viridis) # colour mapping suitable for people with colour blindness
 library(gganimate)
 library(magick)
 
+# HELLO WORLD
+
 # load data
 d<-read.xlsx(here("us_avg_tuition.xlsx"),sheet="Table 5")
 
