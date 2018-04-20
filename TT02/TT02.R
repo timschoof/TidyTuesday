@@ -55,7 +55,7 @@ meanSub16plot %>%
         plot.title = element_text(hjust = 0.5))# center the title
 
 # save
-ggsave("NFL.pdf", width = 10, height = 5)
+ggsave("NFL.png", width = 10, height = 5)
 
 
 
