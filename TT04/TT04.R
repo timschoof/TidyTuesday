@@ -7,7 +7,8 @@
 
 # Figure inspired by https://www.theguardian.com/news/ng-interactive/2018/apr/05/women-are-paid-less-than-men-heres-how-to-fix-it
 
-require(tidyverse)
+library(tidyverse)
+library(ggrepel)
 
 url_data <- "https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/"
 data_file <- "week4_australian_salary.csv"
@@ -23,13 +24,15 @@ d <- data %>%
 
 # add column indicating whether women get paid more or less than  men
 d <- d %>%
-  mutate(paySkew = ifelse(payGap > 0, 'Women paid less','Women paid more'))
+  mutate(paySkew = ifelse(payGap > 0, 'Women paid less','Women paid more')) %>%
+  mutate(labelToPlot = ifelse(payGap < -60, occupation,NA))
 
-# beeswarm-like histogram
+# beeswarm-like histogram showing gender pay gap as a percentage of men's pay for differen occupations
 d %>%
 ggplot(aes(x = payGap, fill = paySkew)) +
   geom_dotplot(method="histodot", binwidth = 3,colour = NA) +
-  labs(x = "Mean gender pay gap as a percentage of men's pay", y = "", 
+  geom_text_repel(aes(label = labelToPlot),box.padding = unit(2,'lines'),y=0,direction = "y")+
+  labs(x = "Gender pay gap as a percentage of men's pay", y = "", 
        title = "Gender pay gap in Australia", 
        subtitle = "2013-14 income year") +
   theme(panel.background = element_rect(fill = "white" ),
@@ -42,6 +45,3 @@ ggplot(aes(x = payGap, fill = paySkew)) +
 
 # save
 ggsave("PayGap.png")
-
-
-
