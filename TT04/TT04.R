@@ -29,7 +29,6 @@ d <- d %>%
 d %>%
 ggplot(aes(x = payGap, fill = paySkew)) +
   geom_dotplot(method="histodot", binwidth = 3,colour = NA) +
-  xlim(-100,100)+
   labs(x = "Mean gender pay gap as a percentage of men's pay", y = "", 
        title = "Gender pay gap in Australia", 
        subtitle = "2013-14 income year") +
